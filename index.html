@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Operation Black Tie</title>
+  <style>
+    #join-button-wrapper {
+      display: none;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards;
+}
+    #join-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh; /* full viewport height */
+}
+
+}
+
+
+    @keyframes blinkDots {
+  0% { content: "."; }
+  25% { content: ".."; }
+  50% { content: "..."; }
+  75% { content: "...."; }
+  100% { content: "."; }
+}
+
+    @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#decrypt-text {
+  color: #00ffcc;
+  animation: fadeIn 1s ease forwards;
+  text-align: center;
+}
+
+#join-button {
+  animation: fadeIn 2s ease forwards;
+  font-size: 1.1rem;
+}
+
+    body {
+      background: black;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    button {
+    margin-top: 40px;
+    padding: 12px 30px;
+    background-color: #00ffcc;
+    color: #000;
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+    button:hover {
+    background-color: #00ddaa;
+}
+
+    h1 {
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: flicker 2s infinite;
+    }
+
+    .terminal-box {
+      background-color: #111;
+      border: 2px solid #00ffcc;
+      padding: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ffcc44;
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 12px 30px;
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    a:hover {
+      background-color: #00ddaa;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 24%, 55% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Operation Black Tie</h1>
+
+  <div class="terminal-box">
+    <p><strong>Clearance Level:</strong> TOP SECRET </p>
+    <p><strong>Mission Briefing:</strong> You have been selected as a primary asset for a high-level GROOMSMAN operation. Your loyalty and participation are critical.</p>
+  
+        <div style="max-width: 800px; margin: auto;">
+  <video width="100%" controls autoplay loop>
+    <source src="operation_black_tie.mp4" type="video/mp4">
+  </video>
+</div>
+    
+    <p class="countdown">Estimated Deployment: <span id="countdown"></span></p>
+    <button onclick="sendDiscord()">CLICK HERE TO ACCEPT</button>
+  </div>
+
+<!-- Decryption Message + JOIN Button (both hidden initially) -->
+<div id="join-container" style="display: none; margin-top: 30px;">
+  <p id="decrypt-text" style="font-family: 'Courier New', monospace; font-size: 1.2rem; opacity: 0;">
+    Decryption in progress<span id="dots">.</span>
+  </p>
+
+  <div id="join-button-wrapper" style="display: none; margin-top: 20px;">
+    <a href="https://discord.gg/R7MGbbbT" target="_blank">
+      <button id="join-button">JOIN MISSION</button>
+    </a>
+  </div>
+</div>
+
+
+  
+<script>
+function sendDiscord() {
+  fetch("https://discord.com/api/webhooks/1411105934788264039/lMuAnwj5q8jEPMrPVf1Oe2bBERKNYDlI8Tv3_o2zf8tDEqmdKqaWBlN1IB4yb4L3jW7X", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      username: "Operation Black Tie",
+      content: "🕶️ ALERT: An agent has entered the mission portal."
+    })
+  })
+  .then(res => {
+    alert("📡 Transmission sent!");
+
+    const joinContainer = document.getElementById("join-container");
+    const decryptText = document.getElementById("decrypt-text");
+    const joinButtonWrapper = document.getElementById("join-button-wrapper");
+
+    joinContainer.style.display = "block";
+
+    // Animate decryption message
+    setTimeout(() => {
+      decryptText.style.opacity = 1;
+    }, 500);
+
+    // Simulate decryption delay, then show join button
+    setTimeout(() => {
+      joinButtonWrapper.style.display = "block";
+
+      setTimeout(() => {
+      joinButtonWrapper.style.opacity = 1;
+      }, 50);
+
+    }, 3000); // 3 seconds
+  })
+  .catch(err => alert("❌ Mission failed."));
+}
+
+</script>
+
+  <script>
+    // Countdown timer to the bachelor party date
+    const countdownElement = document.getElementById("countdown");
+    const targetDate = new Date("2026-06-25T12:00:00Z"); // Example date
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownElement.innerHTML = "DEPLOYMENT ACTIVE";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+  </script>
+</body>
+</html>

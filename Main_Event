@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Operation Black Tie</title>
+  <style>
+    body {
+      background: black;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      animation: flicker 2s infinite;
+    }
+
+    .terminal-box {
+      background-color: #111;
+      border: 2px solid #00ffcc;
+      padding: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00ffcc44;
+    }
+
+    .countdown {
+      font-size: 1.5rem;
+      margin-top: 20px;
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 40px;
+      padding: 12px 30px;
+      background-color: #00ffcc;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    a:hover {
+      background-color: #00ddaa;
+    }
+
+    @keyframes flicker {
+      0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+      }
+      20%, 24%, 55% {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Operation Black Tie</h1>
+
+  <div class="terminal-box">
+    <p><strong>Clearance Level:</strong> Alpha-G</p>
+    <p><strong>Mission Briefing:</strong> You have been selected as a primary asset for a high-level bachelor operation. Your loyalty and participation are critical.</p>
+    <p class="countdown">Estimated Deployment: <span id="countdown"></span></p>
+    <a href="https://github.com/your-username/operation-black-tie" target="_blank">ENTER MISSION PORTAL</a>
+  </div>
+
+  <script>
+    // Countdown timer to the bachelor party date
+    const countdownElement = document.getElementById("countdown");
+    const targetDate = new Date("2026-06-13T12:00:00Z"); // Example date
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownElement.innerHTML = "DEPLOYMENT ACTIVE";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / 1000 / 60) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
